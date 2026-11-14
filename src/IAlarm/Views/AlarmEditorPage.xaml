@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:IAlarm.ViewModels"
+             xmlns:views="clr-namespace:IAlarm.Views"
+             x:Class="IAlarm.Views.AlarmEditorPage"
+             x:DataType="vm:AlarmEditorViewModel"
+             Shell.TabBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+
+            <Border Padding="12,20" Margin="0,0,0,10"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource LightPanel}, Dark={StaticResource DarkPanel}}">
+                <VerticalStackLayout Spacing="8">
+                    <views:SegmentDisplay Text="{Binding PreviewText}" HeightRequest="100" />
+                    <Label Text="{Binding CountdownText}" Style="{StaticResource Caption}" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="DATE" Style="{StaticResource Caption}" />
+            <DatePicker Date="{Binding Date}" MinimumDate="{Binding Today}" Format="ddd d MMM yyyy" />
+
+            <Label Text="TIME" Style="{StaticResource Caption}" Margin="0,8,0,0" />
+            <TimePicker Time="{Binding Time}" Format="HH:mm" />
+
+            <Label Text="LABEL" Style="{StaticResource Caption}" Margin="0,8,0,0" />
+            <Entry Text="{Binding Label}" Placeholder="Optional" MaxLength="60" ReturnType="Done" />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,24,0,0">
+                <Button Text="CANCEL" Command="{Binding CancelCommand}" />
+                <Button Grid.Column="1" Text="SAVE" Command="{Binding SaveCommand}" />
+            </Grid>
+
+            <Button Text="DELETE" Style="{StaticResource DangerButton}" Command="{Binding DeleteCommand}"
+                    IsVisible="{Binding IsExisting}" Margin="0,12,0,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

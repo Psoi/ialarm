@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:IAlarm.ViewModels"
+             xmlns:views="clr-namespace:IAlarm.Views"
+             x:Class="IAlarm.Views.AlarmsPage"
+             x:DataType="vm:AlarmsViewModel">
+
+    <Grid RowDefinitions="Auto,Auto,*">
+
+        <!-- The watch face: current time, date, next alarm -->
+        <Border Margin="16,16,16,8" Padding="12,20,12,12"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightPanel}, Dark={StaticResource DarkPanel}}">
+            <VerticalStackLayout Spacing="6">
+                <views:SegmentDisplay Text="{Binding ClockText}" HeightRequest="96" />
+                <Label Text="{Binding DateText}" Style="{StaticResource Caption}" HorizontalOptions="Center" />
+                <Label Text="{Binding NextText}" Style="{StaticResource Caption}" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Phone settings that would stop alarms ringing -->
+        <VerticalStackLayout Grid.Row="1" Padding="16,0" Spacing="6" BindableLayout.ItemsSource="{Binding Issues}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="vm:SetupIssueViewModel">
+                    <Border Padding="12,6" Stroke="{StaticResource Warning}">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                            <Label Text="{Binding Text}" FontSize="13" VerticalOptions="Center" />
+                            <Button Grid.Column="1" Text="FIX" Command="{Binding FixCommand}" VerticalOptions="Center" Padding="14,6" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="2" ItemsSource="{Binding Rows}" SelectionMode="None" Margin="0,8,0,0">
+            <CollectionView.EmptyView>
+                <Label Text="NO ALARMS. TAP + TO ADD ONE." Style="{StaticResource Caption}"
+                       HorizontalOptions="Center" VerticalOptions="Center" Margin="0,40" />
+            </CollectionView.EmptyView>
+            <CollectionView.Footer>
+                <BoxView HeightRequest="96" Color="Transparent" BackgroundColor="Transparent" />
+            </CollectionView.Footer>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:AlarmRowViewModel">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems Mode="Execute">
+                                <SwipeItem Text="DELETE" BackgroundColor="{StaticResource Danger}" Command="{Binding DeleteCommand}" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Grid ColumnDefinitions="120,*,Auto" ColumnSpacing="12" Padding="16,10"
+                              BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenCommand}" />
+                            </Grid.GestureRecognizers>
+
+                            <views:SegmentDisplay Text="{Binding TimeText}" HeightRequest="48" Opacity="{Binding Dim}" />
+
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2" Opacity="{Binding Dim}">
+                                <Label Text="{Binding Label}" IsVisible="{Binding HasLabel}" FontAttributes="Bold"
+                                       MaxLines="1" LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding DateText}" Style="{StaticResource Muted}" />
+                                <Label Text="{Binding Status}" Style="{StaticResource Caption}" />
+                            </VerticalStackLayout>
+
+                            <Switch Grid.Column="2" IsToggled="{Binding Enabled}" VerticalOptions="Center" />
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="2" Text="+" Style="{StaticResource Fab}" Command="{Binding AddCommand}"
+                HorizontalOptions="End" VerticalOptions="End" Margin="20"
+                SemanticProperties.Description="Add alarm" />
+    </Grid>
+</ContentPage>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<!-- The retro watch palette. Same values as Views/Palette.cs and Platforms/Android/Resources/values*/colors.xml. -->
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Dark: black with bright LED green -->
+    <Color x:Key="DarkBackground">#000000</Color>
+    <Color x:Key="DarkPanel">#06120A</Color>
+    <Color x:Key="DarkLit">#3DFF5A</Color>
+    <Color x:Key="DarkGhost">#0E2613</Color>
+    <Color x:Key="DarkGlow">#B33DFF5A</Color>
+    <Color x:Key="DarkText">#36E352</Color>
+    <Color x:Key="DarkMuted">#1F9A3A</Color>
+
+    <!-- Light: pale green-grey LCD with dark green -->
+    <Color x:Key="LightBackground">#C9D6BA</Color>
+    <Color x:Key="LightPanel">#BCCAAC</Color>
+    <Color x:Key="LightLit">#1C361E</Color>
+    <Color x:Key="LightGhost">#B3C2A3</Color>
+    <Color x:Key="LightGlow">#661C361E</Color>
+    <Color x:Key="LightText">#1C361E</Color>
+    <Color x:Key="LightMuted">#4F6A4C</Color>
+
+    <Color x:Key="Danger">#C62828</Color>
+    <Color x:Key="Warning">#E0A100</Color>
+</ResourceDictionary>

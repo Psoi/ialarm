@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dark theme: black with LED green. Keep in sync with Views/Palette.cs and Resources/Styles/Colors.xaml. -->
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#3DFF5A</color>
+    <color name="lcd_background">#000000</color>
+</resources>

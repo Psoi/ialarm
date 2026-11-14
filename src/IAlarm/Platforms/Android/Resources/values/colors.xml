@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Light theme: pale LCD. Keep in sync with Views/Palette.cs and Resources/Styles/Colors.xaml. -->
+<resources>
+    <color name="colorPrimary">#1C361E</color>
+    <color name="colorPrimaryDark">#1C361E</color>
+    <color name="colorAccent">#2E6B32</color>
+    <color name="lcd_background">#C9D6BA</color>
+</resources>
